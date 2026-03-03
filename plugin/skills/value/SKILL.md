@@ -5,7 +5,7 @@ description: Value investing strategy that orchestrates analysis plugins into in
 
 # Value Investing Strategy
 
-Orchestrates existing analysis plugins (quality, forensic, DCF, insider, earnings) into a cohesive value investing evaluation. When analysis plugins aren't available, performs self-contained analysis from raw FMP data.
+Orchestrates existing analysis plugins (quality, forensic, valuation, sentiment, earnings) into a cohesive value investing evaluation. When analysis plugins aren't available, performs self-contained analysis from raw FMP data.
 
 ## Philosophy
 
@@ -24,7 +24,7 @@ The unique contribution of the strategy layer:
 - `verdict.md` — Investment verdict with all 5 phases and investor principle answers
 - `synthesis.json` — Structured data (decision, conviction, phase scores, kill conditions)
 
-**Files touched:** Writes to `.analysis/TICKER/strategy-value/`
+**Files touched:** Writes to `.db/pm/value/TICKER/`
 
 ## Required Skills
 
@@ -34,8 +34,8 @@ The unique contribution of the strategy layer:
 | `apex-data-financial:finviz` | Yes | Quick fundamentals snapshot and sentiment |
 | `apex-analysis-quality:quality` | No | Phase 1 delegation — business quality assessment |
 | `apex-analysis-forensic:forensic` | No | Phase 2 delegation — forensic accounting verification |
-| `apex-analysis-insider:insider` | No | Phase 2 enrichment — insider & institutional ownership signals |
-| `apex-analysis-dcf:dcf` | No | Phase 3 delegation — DCF valuation |
+| `apex-analysis-sentiment:analyze` | No | Phase 2 enrichment — sentiment & institutional ownership signals |
+| `apex-analysis-valuation:dcf` | No | Phase 3 delegation — DCF valuation |
 | `apex-analysis-earnings:earnings` | No | Phase 3 enrichment — earnings trajectory and revision momentum |
 
 ## References
@@ -55,11 +55,15 @@ The unique contribution of the strategy layer:
 Before starting, check what analysis outputs already exist:
 
 ```
-.analysis/TICKER/quality/    → Phase 1 delegation available
-.analysis/TICKER/forensic/   → Phase 2 delegation available
-.analysis/TICKER/insider/    → Phase 2 enrichment available
-.analysis/TICKER/dcf/        → Phase 3 delegation available
-.analysis/TICKER/earnings/   → Phase 3 enrichment available
+.db/analysis/quality/TICKER/            → Phase 1 delegation available
+.db/analysis/forensic/TICKER/           → Phase 2 delegation available
+.db/analysis/sentiment/TICKER/           → Phase 2 enrichment available
+.db/analysis/valuation/TICKER/dcf/      → Phase 3 delegation available
+.db/analysis/earnings/TICKER/           → Phase 3 enrichment available
+.db/analysis/valuation/TICKER/comps/    → Phase 3 enrichment (peer-based valuation context)
+.db/analysis/model/TICKER/              → Phase 3 enrichment (rigorous forward projections)
+.db/analysis/earnings/TICKER/research/  → Phase 3+4 enrichment (earnings event context)
+.db/analysis/tearsheet/TICKER/          → Phase 1 quick reference (company snapshot)
 ```
 
 Also check if analysis plugin skills are available in the current environment (they may be installed but not yet run for this ticker).
@@ -85,18 +89,18 @@ Before finalizing evaluation, verify:
 - [ ] **V4**: Verdict includes conviction level (High/Medium/Low/Pass) with reasoning
 - [ ] **V5**: If Buy decision — margin of safety percentage stated
 - [ ] **V6**: Kill conditions defined with specific, measurable triggers
-- [ ] **V7**: Existing analysis outputs from `.analysis/TICKER/` incorporated when available
+- [ ] **V7**: Existing analysis outputs from `.db/analysis/*/TICKER/` incorporated when available
 
 ## When to Use
 
 **USE when:**
 - User asks to evaluate a company for investment
-- `/apex-strategy-value:evaluate TICKER` command
+- `/apex-pm-value:evaluate TICKER` command
 - Need a Buy / Wait / Pass decision with conviction level
 - Want to synthesize existing analysis outputs into a verdict
 
 **DON'T use when:**
 - Only fetching data (use `apex-data-financial:fetch`)
-- Running a specific analysis (use `apex-analysis-dcf:analyze`, etc.)
+- Running a specific analysis (use `apex-analysis-valuation:dcf`, etc.)
 - Screening stocks (no ticker-specific evaluation)
 - Non-investment research tasks

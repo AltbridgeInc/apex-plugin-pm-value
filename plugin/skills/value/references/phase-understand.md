@@ -4,7 +4,7 @@ Determine whether this is a business you can understand, whether it has a durabl
 
 ## Delegation Path
 
-**When `.analysis/TICKER/quality/` exists:**
+**When `.db/analysis/quality/TICKER/` exists:**
 
 Read the quality assessment outputs and extract:
 - Moat type and durability assessment
@@ -23,7 +23,7 @@ Invoke the quality plugin for this ticker first, then read the output.
 
 **When no quality plugin or output available:**
 
-Use raw FMP data from `.data/financial/fmp/TICKER/` to assess:
+Use raw FMP data from `.db/data/financial/fmp/TICKER/` to assess:
 
 ### 1. Business Model
 - Read company profile — what do they do, how do they make money?

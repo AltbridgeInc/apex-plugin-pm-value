@@ -3,16 +3,16 @@ description: "Run value investing evaluation for a company"
 argument-hint: "TICKER"
 ---
 
-# /apex-strategy-value:evaluate
+# /apex-pm-value:evaluate
 
 Run a value investing evaluation for a company using the 5-phase methodology (Understand, Verify, Value, Invert, Verdict) with principles from Buffett, Munger, Graham, Li Lu, Marks, and Klarman.
 
 ## Usage
 
 ```
-/apex-strategy-value:evaluate AAPL
-/apex-strategy-value:evaluate MSFT
-/apex-strategy-value:evaluate BRK-B
+/apex-pm-value:evaluate AAPL
+/apex-pm-value:evaluate MSFT
+/apex-pm-value:evaluate BRK-B
 ```
 
 ## Workflow
@@ -24,11 +24,11 @@ Extract ticker from `$ARGUMENTS`. Convert to uppercase.
 ### Step 2: Check Existing Analysis Outputs
 
 Check for existing analysis outputs that can be synthesized:
-- `.analysis/TICKER/quality/` — business quality assessment
-- `.analysis/TICKER/forensic/` — forensic accounting scores
-- `.analysis/TICKER/insider/` — insider & institutional ownership signals
-- `.analysis/TICKER/dcf/` — DCF valuation model
-- `.analysis/TICKER/earnings/` — earnings trajectory and revision momentum
+- `.db/analysis/quality/TICKER/` — business quality assessment
+- `.db/analysis/forensic/TICKER/` — forensic accounting scores
+- `.db/analysis/sentiment/TICKER/` — sentiment & institutional ownership signals
+- `.db/analysis/valuation/TICKER/dcf/` — DCF valuation model
+- `.db/analysis/earnings/TICKER/` — earnings trajectory and revision momentum
 
 If outputs exist, the strategy will synthesize them. If not, it checks for installed analysis plugins or falls back to self-contained analysis.
 
@@ -53,9 +53,9 @@ Launch the `value-strategist` agent which will:
 
 ### Step 5: Save Results
 
-Save to `.analysis/TICKER/strategy-value/`:
+Save to `.db/pm/value/TICKER/`:
 ```
-.analysis/TICKER/strategy-value/
+.db/pm/value/TICKER/
 ├── verdict.md        # Investment verdict with 5 phases
 └── synthesis.json    # Structured decision data
 ```
@@ -94,4 +94,4 @@ The `value-strategist` agent produces two outputs:
 - When they're not, it performs self-contained analysis from FMP data
 - Phase 4 (Inversion) is always self-contained — unique to strategy layer
 - All investor principle questions are answered, not just quoted
-- Results saved to `.analysis/TICKER/strategy-value/`
+- Results saved to `.db/pm/value/TICKER/`

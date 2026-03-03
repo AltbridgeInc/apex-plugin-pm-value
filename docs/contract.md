@@ -24,7 +24,7 @@ All outputs written to `.analysis/TICKER/strategy-value/`.
 
 ## Dependencies
 - **Plugins (required):** `apex-data-financial` (fmp + finviz)
-- **Plugins (optional):** `apex-analysis-quality`, `apex-analysis-forensic`, `apex-analysis-insider`, `apex-analysis-dcf`, `apex-analysis-earnings`
+- **Plugins (optional):** `apex-analysis-quality`, `apex-analysis-forensic`, `apex-analysis-sentiment`, `apex-analysis-valuation`, `apex-analysis-earnings`
 - **Runtime:** None (no scripts — strategy reasons over data, doesn't compute)
 - No direct API keys required (uses data from financial plugin)
 

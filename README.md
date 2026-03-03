@@ -37,8 +37,8 @@ This plugin references skills from:
 - **apex-data-financial** (`apex-data-financial:fmp`, `apex-data-financial:finviz`) - Financial data (required)
 - **apex-analysis-quality** (`apex-analysis-quality:quality`) - Business quality assessment (optional)
 - **apex-analysis-forensic** (`apex-analysis-forensic:forensic`) - Forensic accounting (optional)
-- **apex-analysis-insider** (`apex-analysis-insider:insider`) - Insider & institutional ownership (optional)
-- **apex-analysis-dcf** (`apex-analysis-dcf:dcf`) - DCF valuation (optional)
+- **apex-analysis-sentiment** (`apex-analysis-sentiment:insider`) - Insider & institutional ownership (optional)
+- **apex-analysis-valuation** (`apex-analysis-valuation:dcf`) - DCF valuation (optional)
 - **apex-analysis-earnings** (`apex-analysis-earnings:earnings`) - Earnings trajectory analysis (optional)
 
 When analysis plugins are installed, the strategy synthesizes their outputs. When they're not, it performs self-contained analysis from raw FMP data.

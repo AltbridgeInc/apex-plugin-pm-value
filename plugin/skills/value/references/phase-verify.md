@@ -4,7 +4,7 @@ Determine whether the reported financials are trustworthy. Verification is about
 
 ## Delegation Path
 
-**When `.analysis/TICKER/forensic/` exists:**
+**When `.db/analysis/forensic/TICKER/` exists:**
 
 Read the forensic analysis outputs and extract:
 - Beneish M-Score (earnings manipulation probability)
@@ -19,15 +19,15 @@ Synthesize into Phase 2 summary. Focus on whether the numbers can be trusted for
 
 Invoke the forensic plugin for this ticker first, then read the output.
 
-## Insider Enrichment
+## Sentiment Enrichment
 
 Insider signals enrich Phase 2 regardless of whether forensic delegation was used. Management conviction (or lack thereof) is a powerful trust signal — Munger's "show me the incentives."
 
-### Insider Delegation Path
+### Sentiment Delegation Path
 
-**When `.analysis/TICKER/insider/insider-profile.json` exists:**
+**When `.db/analysis/sentiment/TICKER/sentiment-profile.json` exists:**
 
-Read the insider profile and extract:
+Read the sentiment profile and extract:
 - Overall score (0-10) and verdict (Strong Conviction / Positive Signals / Neutral / Distribution / Significant Selling)
 - Insider trading patterns: role-weighted buy/sell ratio, material trades, notable buyers
 - Routine vs opportunistic classification: opportunistic buy/sell ratio, signal change direction
@@ -43,13 +43,13 @@ Wire into Phase 2 assessment:
 - **Cluster buying:** Particularly bullish signal — multiple insiders independently buying suggests conviction
 - **Opportunistic sells during earnings beats:** Contradicts reported strength — escalate to red flag
 
-**When `apex-analysis-insider:insider` plugin is available but no output exists:**
+**When `apex-analysis-sentiment:analyze` plugin is available but no output exists:**
 
-Invoke the insider plugin for this ticker first, then read the output.
+Invoke the sentiment plugin for this ticker first, then read the output.
 
-### Insider Self-Contained Path
+### Sentiment Self-Contained Path
 
-**When no insider plugin or output available:**
+**When no sentiment plugin or output available:**
 
 Use raw FMP data to assess insider conviction:
 - Pull insider trading data for last 12 months
@@ -57,13 +57,13 @@ Use raw FMP data to assess insider conviction:
 - Note any cluster buying pattern (multiple insiders buying within 30 days)
 - Check if selling is concentrated in top executives vs broad-based
 - Pull institutional ownership percentage for governance signal
-- This provides a simplified version of what the full insider plugin does with its 4-component scoring
+- This provides a simplified version of what the full sentiment plugin does with its 4-component scoring
 
 ## Self-Contained Path
 
 **When no forensic plugin or output available:**
 
-Use raw FMP data from `.data/financial/fmp/TICKER/` to verify:
+Use raw FMP data from `.db/data/financial/fmp/TICKER/` to verify:
 
 ### 1. FCF vs Net Income (5Y)
 - Compare free cash flow to net income for each of last 5 years
@@ -110,7 +110,7 @@ Be honest. Off-balance-sheet items? Related-party transactions? Complex revenue 
 
 Produce a summary with:
 - **Source:** [plugin output / self-contained]
-- **Insider source:** [insider plugin / self-contained / not available]
+- **Insider source:** [sentiment plugin / self-contained / not available]
 - FCF vs Net Income alignment (aligned / diverging / red flag)
 - Debt trajectory (improving / stable / deteriorating)
 - Share dilution (minimal / moderate / aggressive)

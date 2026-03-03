@@ -4,13 +4,13 @@
 
 ### With Analysis Plugins (Pure Synthesis Mode)
 
-1. Install all analysis plugins: `apex-analysis-quality`, `apex-analysis-forensic`, `apex-analysis-insider`, `apex-analysis-dcf`, `apex-analysis-earnings`
+1. Install all analysis plugins: `apex-analysis-quality`, `apex-analysis-forensic`, `apex-analysis-sentiment`, `apex-analysis-valuation`, `apex-analysis-earnings`
 2. Run analyses first to populate `.analysis/TICKER/`:
    ```
    /apex-analysis-quality:analyze AAPL
    /apex-analysis-forensic:analyze AAPL
-   /apex-analysis-insider:analyze AAPL
-   /apex-analysis-dcf:analyze AAPL
+   /apex-analysis-sentiment:analyze AAPL
+   /apex-analysis-valuation:analyze AAPL
    /apex-analysis-earnings:analyze AAPL
    ```
 3. Run strategy evaluation:

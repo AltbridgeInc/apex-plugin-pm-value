@@ -4,7 +4,7 @@ Determine what the business is worth and what you're being asked to pay. The gap
 
 ## Delegation Path
 
-**When `.analysis/TICKER/dcf/` exists:**
+**When `.db/analysis/valuation/TICKER/dcf/` exists:**
 
 Read the DCF analysis outputs and extract:
 - Fair value estimate (base case)
@@ -15,9 +15,9 @@ Read the DCF analysis outputs and extract:
 
 Synthesize into Phase 3 summary. Focus on the confidence of the valuation range and the margin of safety.
 
-**When `apex-analysis-dcf:dcf` plugin is available but no output exists:**
+**When `apex-analysis-valuation:dcf` plugin is available but no output exists:**
 
-Invoke the DCF plugin for this ticker first, then read the output.
+Invoke the valuation plugin (DCF sub-skill) for this ticker first, then read the output.
 
 ## Earnings Enrichment
 
@@ -25,7 +25,7 @@ Earnings trajectory enriches Phase 3 regardless of whether DCF delegation was us
 
 ### Earnings Delegation Path
 
-**When `.analysis/TICKER/earnings/earnings-profile.json` exists:**
+**When `.db/analysis/earnings/TICKER/earnings-profile.json` exists:**
 
 Read the earnings profile and extract:
 - Composite score (0-10) and verdict (Strong Momentum / Positive / Neutral / Deteriorating / Red Flag)
@@ -60,9 +60,9 @@ Use raw FMP data to assess earnings trajectory:
 
 ## Self-Contained Path
 
-**When no DCF plugin or output available:**
+**When no valuation plugin or output available:**
 
-Use raw FMP data from `.data/financial/fmp/TICKER/` to value:
+Use raw FMP data from `.db/data/financial/fmp/TICKER/` to value:
 
 ### 1. Owner Earnings (Buffett's Concept)
 Buffett's preferred measure of true earnings power:
