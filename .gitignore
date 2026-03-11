@@ -6,7 +6,7 @@ __pycache__/
 .venv/
 venv/
 *.log
-.data/
+.db/
 
 # Test scenario generated outputs
 tests/scenarios/*/workspace/
