@@ -12,8 +12,8 @@ Run a value investing evaluation using the 5-phase methodology (Understand, Veri
 
 ## What This Does
 1. Parse ticker from `$ARGUMENTS`
-2. Fetch required data via `apex-data-financial:financial-fetcher` agent
-3. Run evaluation via the `value-strategist` agent using `value` methodology
+2. Fetch required data via `apex-data-financial:apex-agent-data-financial` agent
+3. Run evaluation via the `apex-agent-pm-value` agent using `value` methodology
 4. Save results to `.db/pm/value/TICKER/`
 
 ## Output
